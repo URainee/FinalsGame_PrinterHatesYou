@@ -131,6 +131,10 @@ public class PrinterScript : MonoBehaviour, IDamageable
         }
 
         StopPrinter();
+
+        // Instantiating paper code here...! 
+
+        _currentProgress = 0;
     }
 
     private void StopPrinter()
@@ -188,6 +192,7 @@ public class PrinterScript : MonoBehaviour, IDamageable
 
     private void DestroyPrinter()
     {
+        StopPrinter();
         _isBroken = true;
     }
 
@@ -250,29 +255,25 @@ public class PrinterScript : MonoBehaviour, IDamageable
 
     private void EffectRoll()
     {
-        // Code below ensures that it doesn't jam at the final second...
-
-        while (_currentProgress < _maxProgress - _progressPerSecond) 
-        {
-            int randDisconnectChance = Random.Range(1, 8);
+            int randDisconnectChance = Random.Range(1, 10);
 
             if (randDisconnectChance == 1)
             {
                 Debug.Log("Printer Disconnected");
                 DisconnectPrinter();
+                StopPrinter();
                 return;
             }
 
-            int randJamChance = Random.Range(1, 8);
+            int randJamChance = Random.Range(1, 10);
 
             if (randJamChance == 1)
             {
                 Debug.Log("Printer Jam");
                 JamPrinter();
+                StopPrinter();
                 return;
             }
-        }
     }
-
     #endregion
 }

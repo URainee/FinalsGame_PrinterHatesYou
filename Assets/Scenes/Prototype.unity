@@ -405,18 +405,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2019315344}
-        m_TargetAssemblyTypeName: PrinterHealth, Assembly-CSharp
-        m_MethodName: SetPrinterBool
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2019315349}
         m_TargetAssemblyTypeName: PrinterScript, Assembly-CSharp
         m_MethodName: StartPrinter
@@ -2743,18 +2731,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2019315344}
-        m_TargetAssemblyTypeName: PrinterHealth, Assembly-CSharp
-        m_MethodName: SetPrinterBool
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2019315349}
         m_TargetAssemblyTypeName: PrinterScript, Assembly-CSharp
         m_MethodName: ConnectPrinter
@@ -2852,7 +2828,6 @@ GameObject:
   - component: {fileID: 2019315347}
   - component: {fileID: 2019315346}
   - component: {fileID: 2019315345}
-  - component: {fileID: 2019315344}
   - component: {fileID: 2019315348}
   - component: {fileID: 2019315349}
   m_Layer: 0
@@ -2862,29 +2837,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2019315344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2019315343}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ab400a5d650c3345bccbb558a4d1b3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PrinterHealth
-  _isPrinting: 0
-  _progressBar: {fileID: 348046976}
-  _maxProgress: 60
-  _currentProgress: 0
-  _progressPerSecond: 2
-  _isJammed: 0
-  healthbar: {fileID: 1172818060}
-  maxHealth: 100
-  regenPerSecond: 1
-  delay: 1
-  interval: 1
 --- !u!114 &2019315345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2892,7 +2844,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2019315343}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 794a26fb44fed8a43ac6a54af0f2430d, type: 3}
   m_Name: 
@@ -3044,9 +2996,9 @@ MonoBehaviour:
   _healthToUnjam: 0
   _isBroken: 0
   _isConnected: 0
+  _canPrint: 0
   _isPrinting: 0
   _isJammed: 0
-  _canPrint: 0
 --- !u!1 &2115383067
 GameObject:
   m_ObjectHideFlags: 0
