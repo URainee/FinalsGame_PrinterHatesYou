@@ -10,9 +10,14 @@ public class PlayerPunchPrinter : MonoBehaviour
 
     private PrinterHealth currentHealth;
 
+    // for the other script
+    private PrinterScript _printerScript;
+
     private void Awake()
     {
-        currentHealth = GetComponent<PrinterHealth>();
+        // currentHealth = GetComponent<PrinterHealth>();
+
+        _printerScript = GetComponent<PrinterScript>();
     }
     private void OnMouseDown()
     {
@@ -22,6 +27,7 @@ public class PlayerPunchPrinter : MonoBehaviour
         }
 
         nextClick = Time.time + coolDown;
-        currentHealth.TakeDamage(damagePerHit);
+        // currentHealth.TakeDamage(damagePerHit);
+        _printerScript.TakeDamage(damagePerHit);
     }
 }

@@ -417,6 +417,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2019315349}
+        m_TargetAssemblyTypeName: PrinterScript, Assembly-CSharp
+        m_MethodName: StartPrinter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &326563674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2743,6 +2755,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2019315349}
+        m_TargetAssemblyTypeName: PrinterScript, Assembly-CSharp
+        m_MethodName: ConnectPrinter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2005313630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2830,6 +2854,7 @@ GameObject:
   - component: {fileID: 2019315345}
   - component: {fileID: 2019315344}
   - component: {fileID: 2019315348}
+  - component: {fileID: 2019315349}
   m_Layer: 0
   m_Name: '[Placeholder Printer Cube]'
   m_TagString: Untagged
@@ -2844,7 +2869,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2019315343}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ab400a5d650c3345bccbb558a4d1b3f, type: 3}
   m_Name: 
@@ -2867,7 +2892,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2019315343}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 794a26fb44fed8a43ac6a54af0f2430d, type: 3}
   m_Name: 
@@ -2994,6 +3019,34 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2019315349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019315343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcb24a22ee2738841bb340b2cc1b9ea3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PrinterScript
+  _maxProgress: 60
+  _currentProgress: 0
+  _progressPerSecond: 2
+  _progressDelay: 1
+  _progressInterval: 0
+  _maxHealth: 100
+  _currentHealth: 0
+  _regenPerSecond: 1
+  _regenDelay: 1
+  _regenInterval: 1
+  _healthToUnjam: 0
+  _isBroken: 0
+  _isConnected: 0
+  _isPrinting: 0
+  _isJammed: 0
+  _canPrint: 0
 --- !u!1 &2115383067
 GameObject:
   m_ObjectHideFlags: 0

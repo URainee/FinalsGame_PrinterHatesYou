@@ -139,6 +139,7 @@ public class PrinterHealth : MonoBehaviour, IDamageable
         // *
         // Function added by Jordan on November 8, 2026
         // * 
+
         _randDurability -= amount;
         
         if (_randDurability <= 0)
@@ -157,6 +158,7 @@ public class PrinterHealth : MonoBehaviour, IDamageable
         // * 
         
         int RandProgressChance = Random.Range(1, 4);
+
         if(RandProgressChance == 1)
         {
             _currentProgress += 2;
