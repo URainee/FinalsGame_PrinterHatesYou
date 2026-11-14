@@ -8,6 +8,9 @@ public class PrinterScript : MonoBehaviour, IDamageable
     // *
 
     [Header("Printing")]
+    [SerializeField] private GameObject _printedPaperPrefab;
+    [SerializeField] private Transform _printedPaperSpawnPoint;
+
     [SerializeField] private int _maxProgress;
     [SerializeField] private int _currentProgress;
     [SerializeField] private int _progressPerSecond;
@@ -33,6 +36,7 @@ public class PrinterScript : MonoBehaviour, IDamageable
 
     // Checks
     [SerializeField] private bool _isBroken;
+    [SerializeField] private bool _isLoaded; // checks to see whether there is paper in the printer
     [SerializeField] private bool _isConnected;
 
     [SerializeField] private bool _canPrint;
@@ -48,6 +52,7 @@ public class PrinterScript : MonoBehaviour, IDamageable
         _currentHealth = _maxHealth;
 
         _isBroken = false;
+        _isLoaded = false;
         _isConnected = false;
         _isPrinting = false;
         _isJammed = false;
@@ -92,6 +97,12 @@ public class PrinterScript : MonoBehaviour, IDamageable
             return false;
         }
 
+        if (!_isLoaded)
+        {
+            Debug.Log("Printer is not Loaded");
+            return false;
+        }
+
         Debug.Log("Printer can Print");
         return true;
     }
@@ -132,7 +143,7 @@ public class PrinterScript : MonoBehaviour, IDamageable
 
         StopPrinter();
 
-        // Instantiating paper code here...! 
+        SpawnPrintedPaper(); // Instantiating paper code here...! 
 
         _currentProgress = 0;
     }
@@ -141,6 +152,12 @@ public class PrinterScript : MonoBehaviour, IDamageable
     {
         Debug.Log("Stopped Printing");
         _isPrinting = false;
+        _isLoaded = false;
+    }
+
+    private void SpawnPrintedPaper()
+    {
+        Instantiate(_printedPaperPrefab, _printedPaperSpawnPoint.position, _printedPaperSpawnPoint.rotation);
     }
 
     // *
@@ -194,6 +211,7 @@ public class PrinterScript : MonoBehaviour, IDamageable
     {
         StopPrinter();
         _isBroken = true;
+        GameManager.Instance.PlayEnding(3);
     }
 
     #endregion
@@ -219,7 +237,6 @@ public class PrinterScript : MonoBehaviour, IDamageable
     #endregion
 
     #region Jamming
-
     private void JamPrinter()
     {
         if (_isPrinting)
@@ -276,4 +293,23 @@ public class PrinterScript : MonoBehaviour, IDamageable
             }
     }
     #endregion
+
+    #region Collisions and Triggers
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent<EmptyPaper>() != null)
+        {
+            EmptyPaper emptyPaper = collision.gameObject.GetComponent<EmptyPaper>();
+
+            if (emptyPaper.IsDragging == false)
+            {
+                emptyPaper.TakeDamage(1);
+                _isLoaded = true;
+            }
+        }
+
+    }
+
+    #endregion 
 }
