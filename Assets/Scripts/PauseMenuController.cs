@@ -8,6 +8,8 @@ public class PauseMenuController : MonoBehaviour
     public float delayBetweenPauseMenu = 0.2f;
     public float startX = -1020f;
 
+    private Sequence _currentTween;
+
     private Vector2[] targetPositions;
 
     private void Awake()

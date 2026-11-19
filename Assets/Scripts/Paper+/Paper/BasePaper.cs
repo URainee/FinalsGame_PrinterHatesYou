@@ -61,8 +61,6 @@ public abstract class BasePaper : MonoBehaviour, IDamageable
     {
         int damageTaken = amount;
 
-        GameManager.Instance.AddScore();
-
         Destroy(this.gameObject);
     }
 }

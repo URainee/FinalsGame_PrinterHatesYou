@@ -17,6 +17,8 @@ public class Tray : MonoBehaviour
             {
                 printedPaper.TakeDamage(1);
 
+                GameManager.Instance.AddScore(1);
+
                 //*
                 //Send out code to tick the GameManager's score counter by one!
                 //e.g. GameManager.Instance.AddScore();

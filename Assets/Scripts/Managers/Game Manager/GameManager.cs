@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _startMinutes;
     public int StartMinutes { get { return _startMinutes; } }
 
-
     void Awake()
     {
         if(Instance != null && Instance != this)
@@ -46,10 +45,10 @@ public class GameManager : MonoBehaviour
         _score = 0;
     }
 
-    public void AddScore()
+    public void AddScore(int passedScore)
     {
         //*
-        //Placed in Tray
+        //Referenced in Tray
         //*
 
         if (_score < _targetScore)
@@ -73,15 +72,17 @@ public class GameManager : MonoBehaviour
             switch (choice)
             {
                 case 1:
+                    //Referenced here in the GameManager
                     Debug.Log("Good Ending");
                     _hasEnding = true;
                     break;
                 case 2:
+                    //Referenced in TimerScript
                     Debug.Log("Bad Ending");
                     _hasEnding = true;
                     break;
                 case 3:
-                    // Made a reference to it in the PrinterScript
+                    //Referenced in PrinterScript's DestroyPrinter()
                     Debug.Log("Broke Ending");
                     _hasEnding = true;
                     break;
