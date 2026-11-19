@@ -8,12 +8,15 @@ public class PauseMenuController : MonoBehaviour
     public float delayBetweenPauseMenu = 0.2f;
     public float startX = -1020f;
 
-    private Sequence _currentTween;
+    private Sequence currentTween;
 
     private Vector2[] targetPositions;
 
     private void Awake()
     {
+        // Resets the scene on load
+        Time.timeScale = 1.0f;
+
         targetPositions = new Vector2[pauseMenu.Length];
 
         for (int i = 0; i < pauseMenu.Length; i++)
@@ -31,6 +34,7 @@ public class PauseMenuController : MonoBehaviour
 
     public void PauseGame()
     {
+
         Time.timeScale = 0f;
 
         for (int i = 0; i < pauseMenu.Length; i++)
@@ -46,7 +50,11 @@ public class PauseMenuController : MonoBehaviour
 
     public void ResumeGame()
     {
-        Sequence sequence = DOTween.Sequence().SetUpdate(true);
+        currentTween?.Kill();
+
+        currentTween = DOTween.Sequence().SetUpdate(true);
+
+        // Sequence sequence = DOTween.Sequence().SetUpdate(true);
 
         for (int i = 0; i < pauseMenu.Length; i++)
         {
@@ -56,13 +64,21 @@ public class PauseMenuController : MonoBehaviour
 
             Vector2 offscreenPosition = new Vector2(startX, targetPositions[i].y);
 
+            currentTween.Insert(i * delayBetweenPauseMenu, pauseMenu[i].DOAnchorPos(offscreenPosition, slideDuration).SetEase(Ease.InBack));
+
+            /*
             sequence.Insert(
                 i * delayBetweenPauseMenu,
                 pauseMenu[i].DOAnchorPos(offscreenPosition, slideDuration)
                     .SetEase(Ease.InBack)
-            );
+            ); */
         }
 
-        sequence.OnComplete(() => Time.timeScale = 1f);
+        currentTween.OnComplete(() => Time.timeScale = 1f);
+
+        //clears the currentTween reference
+        currentTween.OnKill(() => currentTween = null);
+
+        //sequence.OnComplete(() => Time.timeScale = 1f);
     }
 }

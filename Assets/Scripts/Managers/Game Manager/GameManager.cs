@@ -40,9 +40,20 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // Time.timeScale = 1.0f;
+
+        // Makes sure that if the game comes from a scene where
+        // timescale is set 0, then it opens to a timescale
+        // set to one
+
         _hasEnding = false;
 
         _score = 0;
+    }
+
+    private void Update()
+    {
+        Debug.Log(Time.timeScale);
     }
 
     public void AddScore(int passedScore)

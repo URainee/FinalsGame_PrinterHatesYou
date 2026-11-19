@@ -15,7 +15,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Printer
   - 
   - 
   - 
@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Bottom
+    uniqueID: 516132633
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
