@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using TMPro;
 
 
 public class TimerScript : MonoBehaviour
@@ -11,6 +12,8 @@ public class TimerScript : MonoBehaviour
     private bool _timerActive;
 
     private float _currentTime;
+
+    [SerializeField] private TextMeshProUGUI _currentTimeText;
 
     //*
     //Lets the GameManager instance assign a number to startMinutes
@@ -46,8 +49,9 @@ public class TimerScript : MonoBehaviour
 ;            }
         }
         TimeSpan time = TimeSpan.FromSeconds(_currentTime); // converts seconds to be readable as minutes or hours
-        // currentTimeText.text = time.Minutes.ToString() + ":" + time.Seconds.ToString();
-        //Use above code as an example when connecting this for UI. 
+
+        _currentTimeText.text = time.Minutes.ToString() + ":" + time.Seconds.ToString();
+ 
     }
 
     private void StartTimer()
