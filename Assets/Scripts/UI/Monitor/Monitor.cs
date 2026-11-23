@@ -9,7 +9,12 @@ public class Monitor : MonoBehaviour
     //Variables
     //*
 
+    [SerializeField] private GameObject _connectionIcon;
+    [SerializeField] private Sprite _connectedIconImage;
+    [SerializeField] private Sprite _disconnectedIconImage;
+
     [SerializeField] private TextMeshProUGUI _printerDebugText;
+    [SerializeField] private TextMeshProUGUI _progressText;
     [SerializeField] private Image fillImage;
     [SerializeField] private float animationDuration = 1f;
 
@@ -24,6 +29,8 @@ public class Monitor : MonoBehaviour
         UIManager.Instance.OnPrinterUnjam += OnPrinterUnjam;
         UIManager.Instance.OnPrinterConnected += OnPrinterConnected;
         UIManager.Instance.OnPrinterDisconnected += OnPrinterDisconnected;
+
+        UIManager.Instance.OnPrintProgress += UpdateProgressValue;
 
         PrinterDebugStatus(0);
 
@@ -41,9 +48,27 @@ public class Monitor : MonoBehaviour
         Debug.Log($"The passed number is {passedNumber}");
     }
 
-    private void UpdateProgressValie (int passProgress)
+    private void UpdateProgressValue (int passProgress, int passMaxProgress)
     {
+        if (fillImage == null)
+        {
+            Debug.LogError("Assign a Fill Image in the Inspector.", this);
+            return;
+        }
 
+        float progress = (float)passProgress;
+
+        float maxProgress = (float)passMaxProgress;
+
+        progress = Mathf.Clamp01(progress / maxProgress);
+
+        float progressPercentage = Mathf.Round(progress * 100);
+
+        fillImage.DOKill();
+
+        fillImage.DOFillAmount(progress, animationDuration);
+
+        _progressText.text = $"{progressPercentage.ToString()}%";
     }
 
     #endregion
@@ -69,12 +94,14 @@ public class Monitor : MonoBehaviour
 
     private void OnPrinterConnected()
     {
+        SwitchConnectionIcon(true);
         PrinterDebugStatus(5);
         // Change wifi icon
     }
 
     private void OnPrinterDisconnected()
     {
+        SwitchConnectionIcon(false);
         PrinterDebugStatus(4);
         // Change wifi icon
     }
@@ -110,5 +137,22 @@ public class Monitor : MonoBehaviour
         }
     }
 
-    #endregion 
+    #endregion
+
+    #region Connection
+    private void SwitchConnectionIcon(bool isConnected)
+    {
+        Image image = _connectionIcon.GetComponent<Image>();
+
+        if (isConnected)
+        {
+            image.sprite = _connectedIconImage;
+        }
+        else
+        {
+            image.sprite = _disconnectedIconImage;
+        }
+    }
+
+    #endregion
 }

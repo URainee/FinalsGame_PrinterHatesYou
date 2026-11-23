@@ -1,5 +1,6 @@
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PrinterScript : MonoBehaviour, IDamageable
 {
@@ -32,6 +33,10 @@ public class PrinterScript : MonoBehaviour, IDamageable
     [SerializeField] private int _printerHealthPhase = 1;
 
     [Header("Connection")]
+
+    [SerializeField] private GameObject _connectionIcon;
+    [SerializeField] private Image _connectedIconImage;
+    [SerializeField] private Image _disconnectedIconImage;
 
     [Header("Jamming")]
     [SerializeField] private int _healthToUnjam;
@@ -71,7 +76,7 @@ public class PrinterScript : MonoBehaviour, IDamageable
 
         _nextRegenPoint = Time.time + _regenInterval;
 
-        UIManager.Instance.PrintProgress(_currentProgress);
+        UIManager.Instance.PrintProgress(_currentProgress, _maxProgress);
 
         UIManager.Instance.PassTest(1);
 
@@ -161,12 +166,10 @@ public class PrinterScript : MonoBehaviour, IDamageable
 
             _currentProgress += _progressPerSecond;
 
-            UIManager.Instance.PrintProgress(_currentProgress);
+            UIManager.Instance.PrintProgress(_currentProgress, _maxProgress);
 
             _nextProgressPoint = Time.time + _progressDelay;
         }
-
-        UIManager.Instance.PrintProgress(_currentProgress);
 
         StopPrinter();
 
@@ -177,6 +180,8 @@ public class PrinterScript : MonoBehaviour, IDamageable
         _isLoaded = false;
 
         _currentProgress = 0;
+
+        UIManager.Instance.PrintProgress(_currentProgress, _maxProgress);
     }
 
     private void StopPrinter()
@@ -281,6 +286,14 @@ public class PrinterScript : MonoBehaviour, IDamageable
         {
             _isConnected = false;
             UIManager.Instance.PrinterDisconnected();
+        }
+    }
+
+    private void SwitchConnectionIcon(bool isConnected)
+    {
+        if (isConnected)
+        {
+
         }
     }
 

@@ -4,7 +4,6 @@ using UnityEngine.Events;
 
 public class UIManager : MonoBehaviour
 {
-
     public static UIManager Instance { get; private set; }
 
     private static int TestPass;
@@ -14,7 +13,7 @@ public class UIManager : MonoBehaviour
     //*
     public event Action<int> OnPassTest;
 
-    public event Action<int> OnPrintProgress;
+    public event Action<int, int> OnPrintProgress;
 
     public event Action OnPrint;
     public event Action OnPrinterJam;
@@ -50,11 +49,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void PrintProgress(int _passProgress)
+    public void PrintProgress(int _passProgress, int _passMaxProgress)
     {
         if (OnPrintProgress != null)
         {
-            OnPrintProgress(_passProgress);
+            OnPrintProgress(_passProgress, _passMaxProgress);
         }
     }
 
