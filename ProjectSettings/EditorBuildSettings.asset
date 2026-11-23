@@ -17,5 +17,17 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CreditsMenu.unity
     guid: 1dca591b7f1b54a419bf7dcff49e912f
+  - enabled: 1
+    path: Assets/Scenes/DialogueScreen.unity
+    guid: 45c514b650dd4ef41876b959e4e4f8bc
+  - enabled: 1
+    path: Assets/Scenes/Endings/BadEndingScreen.unity
+    guid: 0adc528e34abc5a408ae2ed65eba9ceb
+  - enabled: 1
+    path: Assets/Scenes/Endings/BrokeEndingScreen.unity
+    guid: ac948f3e4d76a2a4aa741b9bbf08a2dc
+  - enabled: 1
+    path: Assets/Scenes/Endings/GoodEndingScreen.unity
+    guid: 5a2cd62d1ad84d94bb5656dc309dead8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

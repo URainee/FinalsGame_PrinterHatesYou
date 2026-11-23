@@ -5,7 +5,7 @@ public class MainMenuController : MonoBehaviour
 {
     public void Play()
     {
-        SceneManager.LoadScene("Prototype");
+        SceneManager.LoadScene("DialogueScreen");
     }
 
     public void Options()
