@@ -50,25 +50,28 @@ public class Monitor : MonoBehaviour
 
     private void UpdateProgressValue (int passProgress, int passMaxProgress)
     {
-        if (fillImage == null)
+        /* if (fillImage == null)
         {
             Debug.LogError("Assign a Fill Image in the Inspector.", this);
             return;
+        } */
+
+        if (fillImage != null)
+        {
+            float progress = (float)passProgress;
+
+            float maxProgress = (float)passMaxProgress;
+
+            progress = Mathf.Clamp01(progress / maxProgress);
+
+            float progressPercentage = Mathf.Round(progress * 100);
+
+            fillImage.DOKill();
+
+            fillImage.DOFillAmount(progress, animationDuration);
+
+            _progressText.text = $"{progressPercentage.ToString()}%";
         }
-
-        float progress = (float)passProgress;
-
-        float maxProgress = (float)passMaxProgress;
-
-        progress = Mathf.Clamp01(progress / maxProgress);
-
-        float progressPercentage = Mathf.Round(progress * 100);
-
-        fillImage.DOKill();
-
-        fillImage.DOFillAmount(progress, animationDuration);
-
-        _progressText.text = $"{progressPercentage.ToString()}%";
     }
 
     #endregion
@@ -142,16 +145,19 @@ public class Monitor : MonoBehaviour
     #region Connection
     private void SwitchConnectionIcon(bool isConnected)
     {
-        Image image = _connectionIcon.GetComponent<Image>();
+        if(_connectionIcon != null)
+        {
+            Image image = _connectionIcon.GetComponent<Image>();
 
-        if (isConnected)
-        {
-            image.sprite = _connectedIconImage;
-        }
-        else
-        {
-            image.sprite = _disconnectedIconImage;
-        }
+            if (isConnected)
+            {
+                image.sprite = _connectedIconImage;
+            }
+            else
+            {
+                image.sprite = _disconnectedIconImage;
+            }
+        }    
     }
 
     #endregion

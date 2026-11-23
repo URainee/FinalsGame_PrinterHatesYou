@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EndingScreen : MonoBehaviour
@@ -7,6 +8,7 @@ public class EndingScreen : MonoBehaviour
     [SerializeField] private CanvasGroup _endingCanvasGroup;
     [SerializeField] private TextMeshProUGUI _endingText; //Phrase related to ending you got...
     [SerializeField] private Button _endingButton; //Button to load the dialogue scene...
+    private int _endingIndex;
 
     private void Start()
     {
@@ -30,16 +32,38 @@ public class EndingScreen : MonoBehaviour
             case 1:
                 //Referenced here in the GameManager
                 _endingText.text = "All materials have been printed!";
+                _endingIndex = 1;
                 break;
             case 2:
                 //Referenced in TimerScript
                 _endingText.text = "You didn't make it in time...";
+                _endingIndex = 2;
                 break;
             case 3:
                 //Referenced in PrinterScript's DestroyPrinter()
                 _endingText.text = "You broke the printer...";
+                _endingIndex = 3;
                 break;
             default:
+                break;
+        }
+    }
+
+    public void OnButtonClick()
+    {
+        switch (_endingIndex)
+        {
+            case 1:
+                SceneManager.LoadScene("GoodEndingScreen");
+                break;
+            case 2:
+                SceneManager.LoadScene("BadEndingScreen");
+                break;
+            case 3:
+                SceneManager.LoadScene("BrokeEndingScreen");
+                break;
+            default:
+                Debug.Log("Unintended Ending Call");
                 break;
         }
     }
