@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour
     public event Action OnPrinterDisconnected;
     public event Action OnPrinterConnected;
 
+    public event Action<int> OnGameEnd;
+
     //*
     //MonoBehavior Functions
     //*
@@ -96,4 +98,18 @@ public class UIManager : MonoBehaviour
             OnPrinterConnected();
         }
     }
+
+    //*
+    //The function below is passed to the Ending Screen on game end, passing the ending ID from GameManager...
+    //*
+    
+    public void GameEnd(int passEndingID)
+    {
+        Debug.Log("End Test One");
+        if (OnGameEnd != null)
+        {
+            OnGameEnd(passEndingID);
+            Debug.Log("End Test Two");
+        }
+    } 
 }

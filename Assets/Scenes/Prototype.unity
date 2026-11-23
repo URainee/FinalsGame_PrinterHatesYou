@@ -999,7 +999,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -283.51514, y: -151.82709}
+  m_AnchoredPosition: {x: -283.51514, y: -93.53198}
   m_SizeDelta: {x: 520.4825, y: 187.064}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &291274220
@@ -2720,7 +2720,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 676.47437, y: -391.0292}
+  m_AnchoredPosition: {x: 676.47437, y: -377}
   m_SizeDelta: {x: 355.9836, y: 128.8701}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &965746576
@@ -3412,10 +3412,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 779114207}
-  - {fileID: 1625738842}
-  - {fileID: 291274219}
   - {fileID: 1488386944}
   - {fileID: 1472162144}
+  - {fileID: 1625738842}
+  - {fileID: 291274219}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4454,6 +4454,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1488386944}
+  - component: {fileID: 1488386946}
   - component: {fileID: 1488386945}
   m_Layer: 5
   m_Name: Ending Screen
@@ -4496,6 +4497,21 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1488386946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488386943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b83637d05e4d1134eb7d2e384e9e67c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EndingScreen
+  _endingCanvasGroup: {fileID: 1488386945}
+  _endingText: {fileID: 1995579508}
+  _endingButton: {fileID: 965746576}
 --- !u!1 &1497561881
 GameObject:
   m_ObjectHideFlags: 0
@@ -6105,9 +6121,9 @@ RectTransform:
   - {fileID: 655030401}
   m_Father: {fileID: 1135384310}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -811, y: 401}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 117, y: -93}
   m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1625738843
@@ -6791,7 +6807,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -638, y: -385}
+  m_AnchoredPosition: {x: -638, y: -360}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1995579508
@@ -7283,9 +7299,6 @@ MonoBehaviour:
   _regenDelay: 1
   _regenInterval: 1
   _printerHealthPhase: 1
-  _connectionIcon: {fileID: 0}
-  _connectedIconImage: {fileID: 0}
-  _disconnectedIconImage: {fileID: 0}
   _healthToUnjam: 0
   _isBroken: 0
   _isLoaded: 0

@@ -101,6 +101,8 @@ public class GameManager : MonoBehaviour
                     Debug.Log("No Such Ending Exists");
                     break;
             }
+
+            UIManager.Instance.GameEnd(choice); // Runs code to load ending scene
         }
             
     }

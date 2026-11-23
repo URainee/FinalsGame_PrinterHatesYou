@@ -34,10 +34,6 @@ public class PrinterScript : MonoBehaviour, IDamageable
 
     [Header("Connection")]
 
-    [SerializeField] private GameObject _connectionIcon;
-    [SerializeField] private Image _connectedIconImage;
-    [SerializeField] private Image _disconnectedIconImage;
-
     [Header("Jamming")]
     [SerializeField] private int _healthToUnjam;
 
@@ -286,14 +282,6 @@ public class PrinterScript : MonoBehaviour, IDamageable
         {
             _isConnected = false;
             UIManager.Instance.PrinterDisconnected();
-        }
-    }
-
-    private void SwitchConnectionIcon(bool isConnected)
-    {
-        if (isConnected)
-        {
-
         }
     }
 
