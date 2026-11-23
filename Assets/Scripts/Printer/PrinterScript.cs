@@ -1,5 +1,6 @@
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PrinterScript : MonoBehaviour, IDamageable
 {
@@ -70,6 +71,11 @@ public class PrinterScript : MonoBehaviour, IDamageable
         _nextProgressPoint = Time.time + _progressDelay;
 
         _nextRegenPoint = Time.time + _regenInterval;
+
+        UIManager.Instance.PrintProgress(_currentProgress, _maxProgress);
+
+        UIManager.Instance.PassTest(1);
+
     }
 
     private void Update()
@@ -132,6 +138,7 @@ public class PrinterScript : MonoBehaviour, IDamageable
         if (_canPrint)
         {
             _isPrinting = true;
+            UIManager.Instance.Print();
         }
     }
 
@@ -155,6 +162,8 @@ public class PrinterScript : MonoBehaviour, IDamageable
 
             _currentProgress += _progressPerSecond;
 
+            UIManager.Instance.PrintProgress(_currentProgress, _maxProgress);
+
             _nextProgressPoint = Time.time + _progressDelay;
         }
 
@@ -167,6 +176,8 @@ public class PrinterScript : MonoBehaviour, IDamageable
         _isLoaded = false;
 
         _currentProgress = 0;
+
+        UIManager.Instance.PrintProgress(_currentProgress, _maxProgress);
     }
 
     private void StopPrinter()
@@ -261,6 +272,7 @@ public class PrinterScript : MonoBehaviour, IDamageable
         if (!_isBroken)
         {
             _isConnected = true;
+            UIManager.Instance.PrinterConnected();
         }
     }
 
@@ -269,6 +281,7 @@ public class PrinterScript : MonoBehaviour, IDamageable
         if (!_isBroken)
         {
             _isConnected = false;
+            UIManager.Instance.PrinterDisconnected();
         }
     }
 
@@ -283,6 +296,9 @@ public class PrinterScript : MonoBehaviour, IDamageable
 
             _healthToUnjam = Random.Range(2, 6);
             // Sets the health needed to pass to unjam the printer...
+
+            UIManager.Instance.PrinterJam();
+            //Calls UI Manager's PrinterJam method to dispatch OnPrinterJam action
         }
     }
 
@@ -301,6 +317,7 @@ public class PrinterScript : MonoBehaviour, IDamageable
         if (_isJammed)
         {
             _isJammed = false;
+            UIManager.Instance.PrinterUnjam();
         }
     }
 

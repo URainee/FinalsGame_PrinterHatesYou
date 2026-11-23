@@ -23,6 +23,7 @@ public class MonitorProgress : MonoBehaviour
         targetValue = Mathf.Clamp01(targetValue);
 
         fillImage.DOKill();
+
         fillImage.DOFillAmount(targetValue, animationDuration);
     }
 }
