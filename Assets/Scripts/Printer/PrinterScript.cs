@@ -102,24 +102,28 @@ public class PrinterScript : MonoBehaviour, IDamageable
         if (_isBroken)
         {
             Debug.Log("Printer is Broken");
+            AudioSystem.Instance.KillLoopSound(SoundType.SFX, 4);
             return false;
         }
 
         if (!_isConnected)
         {
             Debug.Log("Printer is not Connected");
+            AudioSystem.Instance.KillLoopSound(SoundType.SFX, 4);
             return false;
         }
 
         if (!_isLoaded)
         {
             Debug.Log("Printer is not Loaded");
+            AudioSystem.Instance.KillLoopSound(SoundType.SFX, 4);
             return false;
         }
 
         if (_isJammed)
         {
             Debug.Log("Printer is jammed");
+            AudioSystem.Instance.KillLoopSound(SoundType.SFX, 4);
             return false;
         }
 
@@ -139,6 +143,7 @@ public class PrinterScript : MonoBehaviour, IDamageable
         {
             _isPrinting = true;
             UIManager.Instance.Print();
+            AudioSystem.Instance.PlayLoopSound(SoundType.SFX, 4);
         }
     }
 
@@ -165,6 +170,8 @@ public class PrinterScript : MonoBehaviour, IDamageable
             UIManager.Instance.PrintProgress(_currentProgress, _maxProgress);
 
             _nextProgressPoint = Time.time + _progressDelay;
+
+            
         }
 
         StopPrinter();
@@ -184,11 +191,14 @@ public class PrinterScript : MonoBehaviour, IDamageable
     {
         Debug.Log("Stopped Printing");
         _isPrinting = false;
+        AudioSystem.Instance.KillLoopSound(SoundType.SFX, 4);
     }
 
     private void SpawnPrintedPaper()
     {
         Instantiate(_printedPaperPrefab, _printedPaperSpawnPoint.position, _printedPaperSpawnPoint.rotation);
+
+        AudioSystem.Instance.PlaySound(SoundType.SFX, 2);
     }
 
     // *
@@ -200,6 +210,9 @@ public class PrinterScript : MonoBehaviour, IDamageable
     public void TakeDamage(int damageAmount)
     {
         if (_isBroken) { return; }
+
+        // Add code for OnHit to put Audio Manager and Printer Shake in
+        AudioSystem.Instance.PlaySound(SoundType.SFX, 6);
 
         _currentHealth = Mathf.Max(0, _currentHealth - damageAmount);
 
@@ -222,9 +235,13 @@ public class PrinterScript : MonoBehaviour, IDamageable
                 _currentHealth = _maxHealth;
 
                 SetPhase(_printerHealthPhase);
-            
+
+                AudioSystem.Instance.PlaySound(SoundType.SFX, 7);
+
                 return;
             }
+
+            AudioSystem.Instance.PlaySound(SoundType.SFX, 7);
 
             // if printer is in final phase...
             DestroyPrinter();
@@ -269,18 +286,20 @@ public class PrinterScript : MonoBehaviour, IDamageable
 
     public void ConnectPrinter()
     {
-        if (!_isBroken)
+        if (!_isBroken && !_isConnected)
         {
             _isConnected = true;
+            AudioSystem.Instance.PlaySound(SoundType.SFX, 5);
             UIManager.Instance.PrinterConnected();
         }
     }
 
     private void DisconnectPrinter()
     {
-        if (!_isBroken)
+        if (!_isBroken && _isConnected)
         {
             _isConnected = false;
+            AudioSystem.Instance.PlaySound(SoundType.SFX, 5);
             UIManager.Instance.PrinterDisconnected();
         }
     }
@@ -299,6 +318,8 @@ public class PrinterScript : MonoBehaviour, IDamageable
 
             UIManager.Instance.PrinterJam();
             //Calls UI Manager's PrinterJam method to dispatch OnPrinterJam action
+
+            AudioSystem.Instance.PlaySound(SoundType.SFX, 3);
         }
     }
 
@@ -318,6 +339,8 @@ public class PrinterScript : MonoBehaviour, IDamageable
         {
             _isJammed = false;
             UIManager.Instance.PrinterUnjam();
+
+            AudioSystem.Instance.PlaySound(SoundType.SFX, 3);
         }
     }
 
@@ -353,6 +376,7 @@ public class PrinterScript : MonoBehaviour, IDamageable
 
     private void SetPhase(int newPhase)
     {
+
         switch (newPhase)
         {
             case 1:
@@ -394,6 +418,8 @@ public class PrinterScript : MonoBehaviour, IDamageable
             if (emptyPaper.IsDragging == false && _isLoaded == false)
             {
                 emptyPaper.TakeDamage(1);
+
+                AudioSystem.Instance.PlaySound(SoundType.SFX, 1);
 
                 _anim.SetBool("isLoaded", true);
 
