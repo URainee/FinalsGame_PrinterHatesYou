@@ -16,6 +16,7 @@ public class EmptyPaperSpawner : MonoBehaviour
     private void OnMouseDown()
     {
         Instantiate(_emptyPaperPrefab, _mousePosition, Quaternion.identity);
+        AudioSystem.Instance.PlaySound(SoundType.SFX, 0);
     }
 
 }

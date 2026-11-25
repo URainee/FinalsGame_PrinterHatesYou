@@ -17,6 +17,8 @@ public class Tray : MonoBehaviour
             {
                 printedPaper.TakeDamage(1);
 
+                AudioSystem.Instance.PlaySound(SoundType.SFX, 0);
+
                 GameManager.Instance.AddScore(1);
 
                 //*

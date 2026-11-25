@@ -45,11 +45,13 @@ public abstract class BasePaper : MonoBehaviour, IDamageable
     protected virtual void OnMouseDown()
     {
         IsDragging = true;
+        // AudioSystem.Instance.PlaySound(SoundType.UI, 1);
     }
 
     protected virtual void OnMouseUp()
     {
         IsDragging = false;
+        // AudioSystem.Instance.PlaySound(SoundType.UI, 2);
     }
 
     //*
