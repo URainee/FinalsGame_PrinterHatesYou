@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 151020585}
   - component: {fileID: 151020584}
   m_Layer: 5
-  m_Name: Back Button
+  m_Name: Forward Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -316,7 +316,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 151020582}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1364223156}
+        m_TargetAssemblyTypeName: Tutorial, Assembly-CSharp
+        m_MethodName: NextButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &173333718
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,6 +340,7 @@ GameObject:
   - component: {fileID: 173333719}
   - component: {fileID: 173333721}
   - component: {fileID: 173333720}
+  - component: {fileID: 173333722}
   m_Layer: 5
   m_Name: Tutorial Panel
   m_TagString: Untagged
@@ -395,6 +408,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173333718}
   m_CullTransparentMesh: 1
+--- !u!114 &173333722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173333718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RectMask2D
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!1 &178719228
 GameObject:
   m_ObjectHideFlags: 0
@@ -2506,10 +2533,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7938d8c4b36145d488b83cf75d6b7709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tutorial
-  _nextButton: {fileID: 2146374754}
-  _previousButton: {fileID: 151020585}
-  _nextCanvasGroup: {fileID: 2146374753}
-  _previousCanvasGroup: {fileID: 151020584}
+  _nextButton: {fileID: 151020585}
+  _previousButton: {fileID: 2146374754}
+  _nextCanvasGroup: {fileID: 151020584}
+  _previousCanvasGroup: {fileID: 2146374753}
   _exitButton: {fileID: 1557437554}
   _stepText: {fileID: 1537091160}
   _totalStep: 0
@@ -2519,6 +2546,7 @@ MonoBehaviour:
   - {fileID: 400687130}
   - {fileID: 1353388372}
   _currentPanel: {fileID: 0}
+  _currentPanelCounter: 0
   _centerPosition: {fileID: 1922766367}
   _westPosition: {fileID: 1831096684}
   _eastPosition: {fileID: 1498160974}
@@ -3577,7 +3605,7 @@ GameObject:
   - component: {fileID: 2146374754}
   - component: {fileID: 2146374753}
   m_Layer: 5
-  m_Name: Forward Button
+  m_Name: Back Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3696,7 +3724,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2146374751}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1364223156}
+        m_TargetAssemblyTypeName: Tutorial, Assembly-CSharp
+        m_MethodName: PreviousButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

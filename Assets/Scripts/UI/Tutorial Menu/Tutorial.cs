@@ -1,7 +1,7 @@
 using TMPro;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 
 public class Tutorial : MonoBehaviour
 {
@@ -20,6 +20,7 @@ public class Tutorial : MonoBehaviour
     [Header("Scroll")]
     [SerializeField] private RectTransform[] _stepPanels;
     [SerializeField] private RectTransform _currentPanel;
+    [SerializeField] private int _currentPanelCounter;
     [SerializeField] private RectTransform _centerPosition;
     [SerializeField] private RectTransform _westPosition;
     [SerializeField] private RectTransform _eastPosition;
@@ -28,28 +29,30 @@ public class Tutorial : MonoBehaviour
 
     private void Start()
     {
-        SetupPanels();
-
-        _totalStep = _stepPanels.Length;
         _currentStep = 1;
-
-        _stepText.text = $"{_currentStep}/{_totalStep}";
+        _currentPanelCounter = 0;
+        _totalStep = _stepPanels.Length;
 
         _previousCanvasGroup.interactable = false;
+
+        UpdateText(_currentStep);
+        SetupPanels();
     }
 
     public void NextButton()
     {
-        if (_currentStep < _totalStep)
-        {
-            _currentStep++;
-            NextPanel();
-        }
+        _currentStep++;
+        NextPanel();
+        UpdateButtons(_currentStep);
+        UpdateText(_currentStep);
     }
 
     public void PreviousButton()
     {
+        _currentStep--;
         PreviousPanel();
+        UpdateButtons(_currentStep);
+        UpdateText(_currentStep);
     }
 
     private void NextPanel()
@@ -58,17 +61,22 @@ public class Tutorial : MonoBehaviour
 
         _currentSequence = DOTween.Sequence();
 
-        _currentSequence.Append(_currentPanel.DOMove(_westPosition.position, 0.2f));
+        _currentSequence.Append(_stepPanels[_currentPanelCounter].DOMove(_westPosition.position, 0.2f));
         _currentSequence.Join(_stepPanels[_currentStep - 1].DOMove(_centerPosition.position, 0.2f));
 
-        if (_currentStep == _totalStep)
-        {
-            _nextButton.interactable = false;
-        }
+        _currentPanelCounter++;
     }
 
     private void PreviousPanel()
     {
+        _currentSequence?.Kill();
+
+        _currentSequence = DOTween.Sequence();
+
+        _currentSequence.Append(_stepPanels[_currentPanelCounter].DOMove(_eastPosition.position, 0.2f));
+        _currentSequence.Join(_stepPanels[_currentPanelCounter - 1].DOMove(_centerPosition.position, 0.2f));
+
+        _currentPanelCounter--;
 
     }
 
@@ -79,15 +87,32 @@ public class Tutorial : MonoBehaviour
             if (i == 1)
             {
                 _stepPanels[0].position = _centerPosition.position;
-                _stepPanels[0] = _currentPanel;
             }
             
             _stepPanels[i].position = _eastPosition.position;
         }
     }
 
-    private void UpdateButtons()
+    private void UpdateButtons(int passStep)
     {
+        if (passStep == 1)
+        {
+            _previousCanvasGroup.interactable = false;
+            return;
+        }
 
+        if (passStep == _totalStep)
+        {
+            _nextCanvasGroup.interactable = false;
+            return;
+        }
+
+        _previousCanvasGroup.interactable = true;
+        _nextCanvasGroup.interactable = true;
+    }
+
+    private void UpdateText(int passStep)
+    {
+        _stepText.text = $"{_currentStep}/{_totalStep}";
     }
 }
