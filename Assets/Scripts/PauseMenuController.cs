@@ -34,7 +34,6 @@ public class PauseMenuController : MonoBehaviour
 
     public void PauseGame()
     {
-
         Time.timeScale = 0f;
 
         for (int i = 0; i < pauseMenu.Length; i++)
