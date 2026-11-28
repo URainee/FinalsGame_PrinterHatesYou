@@ -35,7 +35,8 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(this.gameObject);
+
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     void Start()
@@ -103,6 +104,8 @@ public class GameManager : MonoBehaviour
             }
 
             UIManager.Instance.GameEnd(choice); // Runs code to load ending scene
+
+            Time.timeScale = 0f;
         }
             
     }
